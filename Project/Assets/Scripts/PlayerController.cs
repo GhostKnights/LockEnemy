@@ -8,14 +8,14 @@ public class PlayerController : MonoBehaviour
     CharacterController m_characterController;
 
     public float lookAngel = 60;
-    public float lookDistance = 5;
+    public float lookDistance = 10;
 
     private float m_fTime = 0;
     float hor = 0;
     float ver = 0;
     // Start is called before the first frame update
 
-    GameObject[] enemies;
+    public GameObject[] enemies;
     GameObject lockedEnemy;
    
     void Start()
@@ -36,7 +36,7 @@ public class PlayerController : MonoBehaviour
 
         if (hor != 0 || ver != 0)
         {
-            Vector3 dir = new Vector3 (hor,0,ver);  
+            Vector3 dir = 50 * new Vector3 (hor,0,ver);  
             //将方向转换为四元数  
             Quaternion quaDir = Quaternion.LookRotation(dir,Vector3.up);  
             //缓慢转动到目标点  
@@ -57,12 +57,14 @@ public class PlayerController : MonoBehaviour
                         if (Vector3.Magnitude(enemy.transform.position - this.transform.position) < Vector3.Magnitude(lockedEnemy.transform.position - this.transform.position))
                         {
                             Debug.Log("the current lock is"+enemy.transform.name);
+                        
                         }
                     }
                     else
                     {
                         lockedEnemy = enemy;
                         Debug.Log("the current lock is"+enemy.transform.name);
+           
                     }
 
                    Debug.Log("in view is"+enemy.transform.name);
